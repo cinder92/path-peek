@@ -47,6 +47,25 @@ wc -l hooks/*.tsx hooks/lib/*
 - No subas `.DS_Store`, `.claude-plugin/types/` ni logs.
 - No añadas `Co-Authored-By` ni líneas de atribución a Claude en commits.
 
+## Documentación obligatoria
+
+Todo cambio se documenta en el mismo commit que lo introduce:
+
+- **Feature:** línea en `README.md` (sección Cambios) y, si cambia la estructura, en `CLAUDE.md`.
+- **Corrección o bug:** línea en Cambios y una entrada en el historial de abajo con causa y solución.
+- **Límite nuevo o plataforma probada:** actualiza las secciones Límites y Plataformas del README.
+
+## Historial de bugs y decisiones
+
+- **Hover no respondía hasta hacer clic:** el terminal no registraba la zona de hover del contenido recién dibujado. Solución: `$.ui.invalidate('ui.render')` a 250 y 900 ms tras `turn.complete`, además de 350 ms tras generar miniaturas.
+- **Validador rechazaba `$` en objetos y props:** `claude plugin validate` exige `$` como argumento directo de funciones declaradas con `function`. Solución: helpers como `function`, `ctx` sin `$`, `onOpen` como closure.
+- **Componentes JSX propios sin `key`:** el refactor convirtió la tarjeta en componentes; riesgo de descartar el hook. Solución: `pathLink(...)` y `body(...)` son funciones que devuelven el `Box` con su `key`.
+- **`getOs` en Git Bash devolvía `MINGW64_NT-…`:** el aviso de ffmpeg mostraba «undefined». Solución: todo valor distinto de `Darwin`/`Linux` cuenta como `Windows`.
+- **Miniaturas fallidas se relanzaban en cada repintado:** con los repintados nuevos, `ffmpeg`/`convert` se ejecutaba varias veces por mensaje. Solución: los fallos se cachean 60 s (`FAIL_TTL_MS`).
+- **Aviso de ffmpeg en cada sesión:** molesto si no se ven videos. Solución: una vez al día con `$.store`.
+- **Windows sin `sh`/`mktemp`:** sin carpeta temporal ni HOME. Solución: respaldo con `cmd /c echo %TEMP%` y `%USERPROFILE%` (sin probar).
+- **Pendiente:** los PNG temporales de `mktemp` no se borran.
+
 ## Publicar
 
 Rama `main`, repo `cinder92/path-peek`. Tras un cambio: validar, probar con `/reload-plugins` y commit.
