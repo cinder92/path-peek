@@ -1,0 +1,5 @@
+{
+ "name": "path-peek",
+ "version": "0.1.0",
+ "description": "Rutas de archivos en las respuestas: clic las abre en el explorador del sistema, hover muestra preview"
+}

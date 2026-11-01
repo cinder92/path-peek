@@ -1,0 +1,5 @@
+{
+  "name": "path-peek",
+  "owner": { "name": "cinder92" },
+  "plugins": [{ "name": "path-peek", "source": "./" }]
+}
