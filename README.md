@@ -23,6 +23,10 @@ claude plugin install path-peek --marketplace cinder92/path-peek
 
 Responde `y` a `Add marketplace?` y elige el alcance.
 
+## Requisitos
+
+`ffmpeg` para la vista previa de video (y de imágenes en Linux/Windows sin ImageMagick). El mod comprueba al iniciar la sesión si está instalado; si falta, muestra un aviso con el comando (`brew install ffmpeg`, `sudo apt install ffmpeg` o `winget install ffmpeg`). No instala nada por su cuenta.
+
 ## Límites
 
 - Rutas sin espacios; no soporta `C:\`.
